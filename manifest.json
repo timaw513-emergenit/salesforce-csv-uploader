@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "Salesforce CSV Uploader",
+  "version": "1.0.0",
+  "description": "Upload CSV data to Salesforce with intelligent field mapping and bulk API support",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "identity",
+    "https://*.salesforce.com/*",
+    "https://*.force.com/*"
+  ],
+  "host_permissions": [
+    "https://*.salesforce.com/*",
+    "https://*.force.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.salesforce.com/*", "https://*.force.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Salesforce CSV Uploader"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["auth.html"],
+      "matches": ["https://*.salesforce.com/*", "https://*.force.com/*"]
+    }
+  ],
+  "oauth2": {
+    "client_id": "YOUR_SALESFORCE_CONNECTED_APP_CLIENT_ID",
+    "scopes": [
+      "api",
+      "refresh_token",
+      "full"
+    ]
+  }
+}
